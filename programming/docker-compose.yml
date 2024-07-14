@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.api
+    container_name: wallet-api
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/app/src
+    #   - ./backend/mock:/app/mock
+    depends_on:
+       db:
+        condition: service_healthy
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: 1234
+    healthcheck:
+      # test: "mysql -uroot -p$$MARIADB_ROOT_PASSWORD"
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 30s
+      retries: 3
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

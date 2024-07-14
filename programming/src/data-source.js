@@ -10,18 +10,17 @@ const options = {
     database: "wallet-api",
     synchronize: true,
     entities: [
-        require("./model/user")
+        require("./entity/userSchema")
     ]
 }
+
+const myDataSource = new DataSource(options)
 
 const initDb = async () => {
     try {
         await createDatabase({
             options
         });
-
-        const myDataSource = new DataSource(options)
-
         await myDataSource.initialize()
     } catch (error) {
         console.log("initDb error", error)
@@ -30,4 +29,4 @@ const initDb = async () => {
 
 
 
-module.exports = { initDb };
+module.exports = { initDb, myDataSource };

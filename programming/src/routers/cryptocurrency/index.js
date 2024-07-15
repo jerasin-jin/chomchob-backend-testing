@@ -33,7 +33,7 @@ routes.post("/", authenticateAdminJWT, async (req, res) => {
 
     await myDataSource.manager.transaction(
       async (transactionalEntityManager) => {
-        await isExist(DbName.CRYPTO, { name }, transactionalEntityManager);
+        await isExist(DbName.CRYPTO, { where: {name} }, transactionalEntityManager);
 
         await create(DbName.CRYPTO, body, transactionalEntityManager);
       }

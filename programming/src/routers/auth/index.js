@@ -18,7 +18,7 @@ routes.post("/login", async (req, res) => {
         }
 
         const { email, password } = body;
-        const user = await findOne(DbName.USER, { email });
+        const user = await findOne(DbName.USER, { where: {email} });
         const matchPassword = await bcrypt.compare(password, user?.password);
 
         if (!matchPassword) {
@@ -36,9 +36,9 @@ routes.post("/login", async (req, res) => {
             { expiresIn: "1h" }
         );
 
-        console.log("token",token)
+        console.log("token", token)
 
-        ResponseHandle(res,200,{token})
+        ResponseHandle(res, 200, { token })
     } catch (err) {
         console.log("catch", err)
         ResponseHandle(res, err.statusCode ?? 500, err)

@@ -13,8 +13,8 @@ class ErrorSchema {
 const ResponseHandle = (res,statusCode, data) => {
     const newResponse = { ...ResponseSchema }
     const defaultStatusCode = 200
-    console.log("statusCode", statusCode)
-    console.log("data", data)
+    // console.log("statusCode", statusCode)
+    // console.log("data", data)
 
     newResponse.statusCode = statusCode
     newResponse.data = data
@@ -26,13 +26,13 @@ const ResponseHandle = (res,statusCode, data) => {
         newResponse.data.message = "VALIDATION_ERROR"
     }
 
-    console.log("newResponse.data", newResponse.data)
+    // console.log("newResponse.data", newResponse.data)
 
     if (newResponse.data == null) {
         throw new ErrorSchema("ResponseHandle Required data", 400)
     }
 
-    console.log("newResponse", newResponse)
+    // console.log("newResponse", newResponse)
 
     res.status(newResponse.statusCode).json(newResponse);
 }

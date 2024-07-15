@@ -1,5 +1,4 @@
 const { ResponseHandle } = require("../../utils/responseHandler")
-const bcrypt = require('bcrypt');
 const validator = require('validator');
 
 const validateCreate = (res, body) => {
@@ -29,14 +28,8 @@ const validateCreate = (res, body) => {
     return valid
 }
 
-const hashPassword = async (password) => {
-    const salt = await bcrypt.genSalt();
-    const hashPassword = await bcrypt.hash(password, salt);
 
-    return hashPassword
-}
 
 module.exports = {
-    validateCreate,
-    hashPassword
+    validateCreate
 }

@@ -15,7 +15,6 @@ const authMiddleware = () => {
 
 
     const jwtAuth = new jwtStrategy(header, (payload, done) => {
-        console.log("payload", payload)
         done(null, payload);
     });
 
@@ -33,9 +32,7 @@ const authenticateUserJWT = (req, res, next) => {
             return res.status(401).json({ message: "Unauthorized" });
         }
 
-        console.log("err", err)
-        console.log("user", user)
-        console.log("info", info)
+        req.headers["user"] = user
         return next();
     })(req, res, next);
 };
@@ -50,7 +47,7 @@ const authenticateAdminJWT = (req, res, next) => {
             return res.status(401).json({ message: "Unauthorized" });
         }
 
-        if(user.role == "user"){
+        if (user.role == "user") {
             return res.status(403).json({ message: "Forbidden" });
         }
         return next();

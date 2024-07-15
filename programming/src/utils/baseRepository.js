@@ -9,23 +9,48 @@ const initData = (payload) => {
 
 
 
-const create = async (dbName, payload) => {
+const create = async (dbName, payload, transaction) => {
+    let model = null
     const data = initData(payload)
-    const model = myDataSource.getRepository(dbName)
+
+    if (transaction != null) {
+        model = transaction.getRepository(dbName)
+    } else {
+        model = myDataSource.getRepository(dbName)
+    }
+
+    console.log("data", data)
+
     await model.save(data)
 }
 
-const find = async (dbName, select) => {
-    const model = myDataSource.getRepository(dbName)
+const find = async (dbName, options, transaction) => {
+    const { select, where, relations } = options ?? {}
+    let model = null
+
+    if (transaction != null) {
+        model = await transaction.getRepository(dbName)
+    } else {
+        model = myDataSource.getRepository(dbName)
+    }
+
     console.log("select", { select })
-    const result = await model.find({ select })
+    const result = await model.find({ select, where, relations })
     return result
 }
 
-const findOne = async (dbName, where) => {
-    const model = myDataSource.getRepository(dbName)
+const findOne = async (dbName, options, transaction) => {
+    const { select, where, relations } = options ?? {}
+    let model = null
+
+    if (transaction != null) {
+        model = await transaction.getRepository(dbName)
+    } else {
+        model = myDataSource.getRepository(dbName)
+    }
+
     console.log("where", { where })
-    const result = await model.findOne({ where })
+    const result = await model.findOne({ select, where, relations })
 
     console.log("result", result)
     if (result == null) {
@@ -35,10 +60,55 @@ const findOne = async (dbName, where) => {
     return result
 }
 
-const isExist = async (dbName, where) => {
-    const model = myDataSource.getRepository(dbName)
+const findOneData = async (dbName, options, transaction) => {
+    const { select, where, relations } = options ?? {}
+    let model = null
+
+    if (transaction != null) {
+        model = await transaction.getRepository(dbName)
+    } else {
+        model = myDataSource.getRepository(dbName)
+    }
+
     console.log("where", { where })
-    const result = await model.findOne({ where })
+    const result = await model.findOne({ select, where, relations })
+    return result
+}
+
+const updateOneById = async (dbName, id, payload, transaction) => {
+    let model = null
+    const data = { ...payload, updated_at: new Date() }
+
+    if (transaction != null) {
+        model = await transaction.getRepository(dbName)
+    } else {
+        model = myDataSource.getRepository(dbName).update()
+    }
+    const result = await model.update({ id }, data)
+
+    console.log("result", result)
+    if (result == null) {
+        throw new ErrorSchema(`${dbName} not found `, 404)
+    }
+
+    return result
+}
+
+const isExist = async (dbName, options, transaction) => {
+    const { select, where, relations } = options ?? {}
+    let model = null
+
+    if (transaction != null) {
+        model = await transaction.getRepository(dbName)
+    } else {
+        model = myDataSource.getRepository(dbName)
+    }
+
+    console.log("where", { where })
+
+    const result = await model.findOne({ select, where, relations })
+
+    console.log("isExist result", result)
 
     if (result != null) {
         throw new ErrorSchema(`${dbName} is exist `, 400)
@@ -48,9 +118,14 @@ const isExist = async (dbName, where) => {
 }
 
 
+
+
 module.exports = {
     create,
     find,
     findOne,
-    isExist
+    isExist,
+    initData,
+    updateOneById,
+    findOneData
 }

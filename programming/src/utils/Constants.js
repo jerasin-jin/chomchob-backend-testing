@@ -1,5 +1,7 @@
 const DbName = {
-    USER : 'user'
+    USER: 'user',
+    WALLET: 'wallet',
+    CRYPTO: 'cryptocurrency'
 }
 
 

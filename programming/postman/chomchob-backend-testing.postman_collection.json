@@ -1,0 +1,360 @@
+{
+	"info": {
+		"_postman_id": "4fba3d0f-9592-4f98-8a47-588f9c671d8c",
+		"name": "chomchob-backend-testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14332842"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "get list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRkZEBnbWFpbC5jb20iLCJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzIwOTU4ODcwLCJleHAiOjE3MjA5NjI0NzB9.ZwonDyhKDrnjRQvlzaAdIP2tdRfDgAaLG5OHHvQlyU4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/user",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test2@gmail.com\",\r\n    \"password\": \"test\",\r\n    \"role\": \"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/user",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/auth/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test2@gmail.com\",\r\n    \"password\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/auth/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "wallet",
+			"item": [
+				{
+					"name": "create wallet",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlkIjoyLCJyb2xlIjoidXNlciIsImlhdCI6MTcyMTA0NDk1MSwiZXhwIjoxNzIxMDQ4NTUxfQ.NnJpyuVZv9pztu10i_wmaijHPEVPPnQ-wYtHYblxn2o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"balance\": 1000,\r\n    \"cryptocurrency\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/wallet",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"wallet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update wallet",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImlkIjozLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MjEwNDQ0OTQsImV4cCI6MTcyMTA0ODA5NH0.aXY5DCAwTwH8maKEQya_rTDmoY2a3CGeTZPkbWvo0wQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"balance\": 10000,\r\n    \"cryptocurrency\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/wallet/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"wallet",
+								"1"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cryptocurrency",
+			"item": [
+				{
+					"name": "create cryptocurrency",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImlkIjozLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MjEwNDQ3MDUsImV4cCI6MTcyMTA0ODMwNX0.vGTdz4eS1ZBUTtbQYIfYwnm7itkE6SkBsmTtbhiI1wY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"ฺXRP\",\r\n    \"symbol\": \"XRP\",\r\n    \"rate\": 1000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cryptocurrency",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cryptocurrency"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get cryptocurrency total",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImlkIjozLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MjEwNDQ0NjEsImV4cCI6MTcyMTA0ODA2MX0.e3_Vlw6t44hiyA66UkiXcjAE6ILZuABfdVc2n49_rxE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/cryptocurrency/total",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cryptocurrency",
+								"total"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update cryptocurrency",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImlkIjozLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MjEwNDQ3MDUsImV4cCI6MTcyMTA0ODMwNX0.vGTdz4eS1ZBUTtbQYIfYwnm7itkE6SkBsmTtbhiI1wY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rate\": 100.23\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/cryptocurrency/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cryptocurrency",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "transfer",
+			"item": [
+				{
+					"name": "transfer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlkIjoyLCJyb2xlIjoidXNlciIsImlhdCI6MTcyMTA0NDk1MSwiZXhwIjoxNzIxMDQ4NTUxfQ.NnJpyuVZv9pztu10i_wmaijHPEVPPnQ-wYtHYblxn2o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"senderCryptoId\": 3,\r\n    \"receiverId\": 1,\r\n    \"receiverCryptoId\": 3,\r\n    \"amount\": 230\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/transfer",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"transfer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

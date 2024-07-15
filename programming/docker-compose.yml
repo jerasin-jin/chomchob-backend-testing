@@ -20,12 +20,15 @@ services:
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: 1234
+    volumes:
+      - ./db-data:/var/lib/mysql:z
     healthcheck:
       # test: "mysql -uroot -p$$MARIADB_ROOT_PASSWORD"
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       interval: 10s
       timeout: 30s
       retries: 3
+
 
   adminer:
     image: adminer

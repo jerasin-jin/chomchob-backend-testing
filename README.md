@@ -16,4 +16,4 @@ $ make dev
 ```
 
 ## Database
-  - You can see part [database](database/THAI_DB.md) for better understanding.
+  - You can see part [database](database/README.md) for better understanding.
